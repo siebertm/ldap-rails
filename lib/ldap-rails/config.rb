@@ -23,6 +23,10 @@ module LdapRails
       end
 
       @ldap = Net::LDAP.new opts
+      
+      if config[:auth_dn].present?
+        @ldap.authenticate config[:auth_dn], config[:auth_pw]
+      end
     end
 
     private
